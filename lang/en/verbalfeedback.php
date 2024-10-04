@@ -239,3 +239,4 @@ $string['verynegative'] = 'Very negative';
 $string['verypositive'] = 'Very positive';
 $string['weight'] = 'Weight';
 $string['weightedaverage'] = 'Weighted Ø';
+$string['downloadreport'] = 'Download Report';
