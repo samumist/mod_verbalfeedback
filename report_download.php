@@ -90,11 +90,14 @@ $radarimg = graph_utils::create_radar_graph($report);
 
 $pdf = new pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
+$pdf->SetFont('stsonglight', '', 12); // 使用支持中文的字体
+$pdf->setFontSubsetting(true);
+
 // Set document information.
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('BFH');
-$pdf->SetTitle('Verbalfeedback example report');
-$pdf->SetSubject('TCPDF Tutorial');
+$pdf->SetAuthor('ELF');
+$pdf->SetTitle('问卷调查报告');
+$pdf->SetSubject('问卷调查结果');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // Set default header data.
@@ -118,12 +121,12 @@ if (!$logofilepath) {
 $logoplaceholder = "mod/verbalfeedback/pix/logoplaceholder.png";
 $pdf->SetHeaderData($logoplaceholder, 25, '', '');
 
-// Set header and footer fonts.
-$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
-$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
+// 设置页眉和页脚字体
+$pdf->setHeaderFont(['stsonglight', '', PDF_FONT_SIZE_MAIN]);
+$pdf->setFooterFont(['stsonglight', '', PDF_FONT_SIZE_DATA]);
 
 // Set default monospaced font.
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+$pdf->SetDefaultMonospacedFont('stsonglight');
 
 // Set margins.
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -152,6 +155,5 @@ $pdf->Image('@' . file_get_contents($imagefile), 15, 5, $imagescaledwidth, 18);
 $pdf->ImageSVG('@' . $radarimg, $x = 16, $y = 28, $w = '', $h = '', $link = '', $align = '', $palign = 'R',
     $border = 1, $fitonpage = false);
 $pdf->writeHTML($html, true, false, true, false, '');
-
 $pdf->lastPage();
-$pdf->Output('example_report.pdf', 'I');
+$pdf->Output('download_report.pdf', 'I');
